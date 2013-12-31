@@ -26,7 +26,7 @@ public class ITestSplitter {
     /**
      * Input file path.
      */
-    private final String INPUT_FILE_PATH =   "./test.txt";
+    private final String INPUT_FILE_PATH = "./test.txt";
 
     /**
      * Test directory path.
@@ -40,16 +40,13 @@ public class ITestSplitter {
 
     /**
      * Tests splitter work.
-     *
-     * @throws IOException exceptions produced by failed or interrupted I/O operations
      */
     @Test
-    public void testSplitter() throws IOException {
+    public void testSplitter() {
 
         final File testDirectory = new File(TEST_DIR_PATH);
         final File inputFile = new File(INPUT_FILE_PATH);
         final File outputFile = new File(OUTPUT_FILE_PATH);
-
         try {
             testDirectory.mkdir();
             PrintWriter testFileStream = new PrintWriter("./test.txt", "UTF-8");
@@ -85,6 +82,8 @@ public class ITestSplitter {
                 firstTestStream.close();
                 secondTestStream.close();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             inputFile.delete();
             outputFile.delete();

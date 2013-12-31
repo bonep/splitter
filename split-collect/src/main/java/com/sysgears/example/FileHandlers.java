@@ -27,5 +27,5 @@ public interface FileHandlers {
      * @param workSize      work size for file handlers
      * @return files for file handlers
      */
-    ArrayList<File> getFiles(String filePath, String directoryPath, long workSize);
+    ArrayList<File> getFiles(final String filePath, final String directoryPath, final long workSize);
 }

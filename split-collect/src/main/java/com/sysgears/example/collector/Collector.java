@@ -18,7 +18,7 @@ public class Collector implements FileHandlers {
     /**
      * Log object.
      */
-    public static final Logger log = Logger.getLogger(Collector.class);
+    private static final Logger log = Logger.getLogger(Collector.class);
 
     /**
      * File manager object.
@@ -47,7 +47,7 @@ public class Collector implements FileHandlers {
                    final RandomAccessFile fileInputStream,
                    final long workSize) {
         log.debug("Runs collector with size to work: " + workSize);
-        int numberOfBytesToProcess = -1;
+        int numberOfBytesToProcess;
         final byte buffer[] = new byte[(int) workSize];
         try {
             numberOfBytesToProcess = fileInputStream.read(buffer, 0, (int) workSize);
@@ -55,7 +55,7 @@ public class Collector implements FileHandlers {
                 fileOutputStream.write(buffer, 0, numberOfBytesToProcess);
         } catch (IOException e) {
             log.error("IOException when an red/write file :" + e.getMessage(), e);
-            e.printStackTrace();
+            numberOfBytesToProcess=-1;
         }
         log.info("Handled bytes - " + numberOfBytesToProcess + " and return then");
 
@@ -72,11 +72,7 @@ public class Collector implements FileHandlers {
      */
     @Override
     public ArrayList<File> getFiles(final String filePath, final String directoryPath, final long workSize) {
-        final ArrayList<File> result;
-        final int numberFiles = (int) Math.ceil((double) new File(filePath).length() / workSize);
-        result = fileManager.createFilesInDirectory(directoryPath, Constants.MY_TYPE, numberFiles);
-
-        return result;
+        return fileManager.getFilesInDirectory(directoryPath,Constants.MY_TYPE);
     }
 }
 

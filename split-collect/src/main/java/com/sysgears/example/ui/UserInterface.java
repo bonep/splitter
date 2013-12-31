@@ -8,6 +8,7 @@ import com.sysgears.example.statistic.Statistics;
 import com.sysgeats.example.io.IOManager;
 import org.apache.log4j.Logger;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -87,10 +88,15 @@ public class UserInterface {
                     ioManager.printLine("Enter split size in mega byte");
                     Long splitSize = ioManager.readLong();
                     if (splitSize != null) {
-                        log.debug("User entered command \"split\" for " + filePath + " to "
-                                + directoryPath + ", split size:" + splitSize*Constants.MEGA_BYTE);
-                        fileHandlersService.run(filePath, directoryPath, splitter, splitSize*Constants.MEGA_BYTE
-                                , new Statistics(Constants.SECOND, ioManager));
+                        try {
+                            log.debug("User entered command \"split\" for " + filePath + " to " +
+                                    directoryPath + ", split size:" + splitSize * Constants.MEGA_BYTE);
+                            fileHandlersService.run(filePath, directoryPath, splitter, splitSize * Constants.MEGA_BYTE,
+                                    new Statistics(Constants.SECOND, ioManager));
+                        } catch (FileNotFoundException e) {
+                            ioManager.printLine("File not found:" + e.getMessage());
+                            log.error("File not found:" + e.getMessage(), e);
+                        }
                     } else {
                         ioManager.printLine("Invalid format for \"split size\"");
                     }
@@ -100,10 +106,14 @@ public class UserInterface {
                     filePath = ioManager.readLine();
                     ioManager.printLine("Enter directory path");
                     directoryPath = ioManager.readLine();
-                    log.debug("User entered command \"collect\" for " + filePath + " from "
-                            + directoryPath);
-                    fileHandlersService.run(filePath, directoryPath, collector, -1,
-                            new Statistics(Constants.SECOND, ioManager));
+                    log.debug("User entered command \"collect\" for " + filePath + " from " + directoryPath);
+                    try {
+                        fileHandlersService.run(filePath, directoryPath, collector, -1,
+                                new Statistics(Constants.SECOND, ioManager));
+                    } catch (FileNotFoundException e) {
+                        ioManager.printLine("File not found:" + e.getMessage());
+                        log.error("File not found:" + e.getMessage(), e);
+                    }
                     break;
             }
         } while (menuCommand != Commands.EXIT);

@@ -69,7 +69,7 @@ public class Worker extends Thread {
         this.fileHandlers = fileHandlers;
         this.semaphore = semaphore;
         this.statistic = statistic;
-        this.workSize=workSize;
+        this.workSize = workSize;
         log.debug("Create worker for " + fileHandlers.getClass());
     }
 
@@ -89,7 +89,7 @@ public class Worker extends Thread {
                 processBytes += currentProgressBytes;
                 statistic.setCurrentPosition(processBytes);
             } while ((currentProgressBytes != -1)
-                    &&(processBytes!=workSize));
+                    && (processBytes != workSize));
         } catch (InterruptedException e) {
             log.error("Exception synchronised threads: " + e.getMessage(), e);
             e.printStackTrace();

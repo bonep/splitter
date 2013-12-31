@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Splitter implements FileHandlers {
 
     /**
-     * Log object
+     * Log object.
      */
     private static final Logger log = Logger.getLogger(Splitter.class);
 
@@ -48,15 +48,13 @@ public class Splitter implements FileHandlers {
                    final RandomAccessFile fileOutputStream,
                    final long workSize) {
         log.debug("Run splitter for split file on " + workSize + "bytes");
-        assert workSize >= 0;
-        assert fileInputStream != null;
-        assert fileOutputStream != null;
         int numberOfBytesToProcess;
         final byte buffer[] = new byte[(int) workSize];
         try {
             numberOfBytesToProcess = fileInputStream.read(buffer, 0, (int) workSize);
-            if (numberOfBytesToProcess != -1)
+            if (numberOfBytesToProcess != -1) {
                 fileOutputStream.write(buffer, 0, numberOfBytesToProcess);
+            }
         } catch (IOException e) {
             log.error("IOException when an red/write file: " + e.getMessage(), e);
             numberOfBytesToProcess = -1;

@@ -56,17 +56,17 @@ public class FileHandlersService {
                     final FileHandlers fileHandlers,
                     final long workSize,
                     final Statistics statistics) throws IOException {
-        log.debug("Run service for creating and manage workers for " + fileHandlers.getClass()
-                + ". Directory path: " + directoryPath + ", file path: " + filePath);
+        log.debug("Run service for creating and manage workers for " + fileHandlers.getClass() +
+                ". Directory path: " + directoryPath + ", file path: " + filePath);
         final File mainFile = new File(filePath);
         final Position position = new Position(0, workSize, mainFile.length());
         final ArrayList<File> files = fileHandlers.getFiles(filePath, directoryPath, workSize);
         final ArrayList<Worker> workers = new ArrayList<Worker>();
         for (File file : files) {
-            long currentPosition =  position.getCurrentPosition();
-            long sizeToWork = position.nextPosition()-currentPosition;
+            long currentPosition = position.getCurrentPosition();
+            long sizeToWork = position.nextPosition() - currentPosition;
             workers.add(fileHandlersFactory.createWorker(fileHandlers, mainFile, file, semaphore,
-                    currentPosition,sizeToWork, statistics.addProgress(sizeToWork)));
+                    currentPosition, sizeToWork, statistics.addProgress(sizeToWork)));
         }
         for (Worker worker : workers) {
             worker.start();

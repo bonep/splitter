@@ -42,9 +42,8 @@ public class FileHandlersFactory {
         RandomAccessFile firstFileStream = new RandomAccessFile(mainFile, "rw");
         firstFileStream.seek(position);
         RandomAccessFile secondFileStream = new RandomAccessFile(workingFile, "rw");
-        log.info("Creates worker for " + FileHandlers.class + " for " + mainFile.getPath()
-                + ", position: " + position + ", work size: " + workSize);
-
-        return new Worker(firstFileStream, secondFileStream,workSize, fileHandlers, semaphore, progress);
+        log.info("Creates worker for " + FileHandlers.class + " for " + mainFile.getPath() +
+                ", position: " + position + ", work size: " + workSize);
+        return new Worker(firstFileStream, secondFileStream, workSize, fileHandlers, semaphore, progress);
     }
 }

@@ -31,7 +31,7 @@ public class Statistics extends Thread {
     private final ProgressForThreads progressForThreads = new ProgressForThreads();
 
     /**
-     * Constructs statistic with interval for print and ioManager
+     * Constructs statistic with interval for print and ioManager.
      *
      * @param intervalForPrint interval for print statistics in seconds
      * @param ioManager        Manager i/o streams.

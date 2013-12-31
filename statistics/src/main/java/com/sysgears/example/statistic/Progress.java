@@ -15,7 +15,7 @@ public class Progress {
     /**
      * Progress finish.
      */
-    public static int PROGRESS_FINISH = 100;
+    public static final int PROGRESS_FINISH = 100;
 
     /**
      * End position.

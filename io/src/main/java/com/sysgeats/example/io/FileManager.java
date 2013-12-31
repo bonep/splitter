@@ -1,7 +1,5 @@
 package com.sysgeats.example.io;
 
-import org.apache.log4j.Logger;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;

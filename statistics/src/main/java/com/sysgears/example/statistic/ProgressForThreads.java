@@ -12,7 +12,7 @@ public class ProgressForThreads {
     /**
      * Log object.
      */
-    private static final Logger log = Logger.getLogger(Statistics.class);
+    private static final Logger log = Logger.getLogger(ProgressForThreads.class);
 
     /**
      * End position.
@@ -30,7 +30,7 @@ public class ProgressForThreads {
      * @param endPosition end position.
      * @return new progress
      */
-    public Progress add(long endPosition) {
+    public Progress add(final long endPosition) {
         log.info("Added progress by end position: " + endPosition);
         this.endPosition += endPosition;
         Progress progress = new Progress(endPosition);
@@ -46,7 +46,7 @@ public class ProgressForThreads {
      */
     public long getAllProgress() {
         long currentPosition = 0;
-        long result;
+        final long result;
         for (Progress progress : progresses) {
             currentPosition += progress.getCurrentPosition();
         }
@@ -66,7 +66,7 @@ public class ProgressForThreads {
      * @return progress for each thread
      */
     public ArrayList<Integer> getProgressThreads() {
-        ArrayList<Integer> result = new ArrayList<Integer>();
+        final ArrayList<Integer> result = new ArrayList<Integer>();
         for (Progress progress : progresses) {
             result.add(progress.getProgressInPercentages());
         }
