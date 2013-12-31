@@ -19,4 +19,9 @@ public class Constants {
      * Maximal number threads.
      */
     public static final int MAX_NUMBER_THREADS = 8;
+
+    /**
+     * Type for created files.
+     */
+    public static final String MY_TYPE = "mytype";
 }

@@ -63,8 +63,10 @@ public class FileHandlersService {
         final ArrayList<File> files = fileHandlers.getFiles(filePath, directoryPath, workSize);
         final ArrayList<Worker> workers = new ArrayList<Worker>();
         for (File file : files) {
+            long currentPosition =  position.getCurrentPosition();
+            long sizeToWork = position.nextPosition()-currentPosition;
             workers.add(fileHandlersFactory.createWorker(fileHandlers, mainFile, file, semaphore,
-                    position.getCurrentPosition(), statistics.addProgress(position.nextPosition())));
+                    currentPosition,sizeToWork, statistics.addProgress(sizeToWork)));
         }
         for (Worker worker : workers) {
             worker.start();

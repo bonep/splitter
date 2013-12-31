@@ -1,4 +1,4 @@
-package com.sysgears.example;
+package com.sysgears.example.service;
 
 import com.sysgears.example.service.Position;
 import org.testng.Assert;
@@ -14,9 +14,18 @@ public class UTestPosition {
      */
     @Test
     public void testPosition() {
-        Position position = new Position(0, 5, 9);
+        Position position = new Position(0, 5, 20);
         Assert.assertTrue(position.getCurrentPosition() == 0);
         Assert.assertTrue(position.nextPosition()==5);
-        Assert.assertTrue(position.nextPosition()==9);
+        Assert.assertTrue(position.getCurrentPosition() == 5);
+        Assert.assertTrue(position.nextPosition()==10);
+        Assert.assertTrue(position.getCurrentPosition() == 10);
+        Assert.assertTrue(position.nextPosition()==15);
+        Assert.assertTrue(position.getCurrentPosition() == 15);
+        Assert.assertTrue(position.nextPosition()==20);
+        Assert.assertTrue(position.getCurrentPosition() == 20);
+        Assert.assertTrue(position.nextPosition()==20);
+        Assert.assertTrue(position.getCurrentPosition() == 20);
+
     }
 }

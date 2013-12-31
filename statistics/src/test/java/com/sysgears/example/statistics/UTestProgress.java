@@ -1,4 +1,4 @@
-package com.sysgears.example;
+package com.sysgears.example.statistics;
 
 import com.sysgears.example.statistic.Progress;
 import org.testng.Assert;
@@ -15,20 +15,25 @@ public class UTestProgress {
      */
     private Progress progress;
 
+    /**
+     * Position data provider.
+     *
+     * @return position, end point and result
+     */
     @DataProvider
     public Object[][] positionDate() {
         return new Object[][]{
-                {0,0,100 },
-                {0,50,0 },
-                {64,100,64 }
+                {0, 0, 100},
+                {0, 50, 0},
+                {64, 100, 64}
         };
     }
 
     /**
      * Tests getter for process in percentages.
      */
-    @Test(dataProvider="positionDate")
-    public void testGetterProcessInPercentages(final long currentPosition,final long endPosition,final int result) {
+    @Test(dataProvider = "positionDate")
+    public void testGetterProcessInPercentages(final long currentPosition, final long endPosition, final int result) {
         progress = new Progress(endPosition);
         progress.setCurrentPosition(currentPosition);
         Assert.assertTrue(progress.getProgressInPercentages().equals(result));
@@ -37,19 +42,9 @@ public class UTestProgress {
     /**
      * Tests setter for current position
      */
-    @Test
-    public void testSetterCurrentPosition() {
-        progress = new Progress(0);
-        Assert.assertTrue(progress.setCurrentPosition(0));
-        progress = new Progress(50);
-        Assert.assertTrue(progress.setCurrentPosition(40));
-        progress = new Progress(100);
-        Assert.assertTrue(progress.setCurrentPosition(100));
-        progress = new Progress(20);
-        Assert.assertFalse(progress.setCurrentPosition(30));
-        progress = new Progress(-5);
-        Assert.assertFalse(progress.setCurrentPosition(0));
-        progress = new Progress(100);
-        Assert.assertFalse(progress.setCurrentPosition(101));
+    @Test(dataProvider = "positionDate")
+    public void testSetterCurrentPosition(final long currentPosition, final long endPosition) {
+        progress = new Progress(endPosition);
+        Assert.assertTrue(progress.setCurrentPosition(currentPosition));
     }
 }

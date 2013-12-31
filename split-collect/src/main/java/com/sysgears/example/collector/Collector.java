@@ -1,5 +1,6 @@
 package com.sysgears.example.collector;
 
+import com.sysgears.example.Constants;
 import com.sysgears.example.FileHandlers;
 import com.sysgeats.example.io.FileManager;
 import org.apache.log4j.Logger;
@@ -73,7 +74,7 @@ public class Collector implements FileHandlers {
     public ArrayList<File> getFiles(final String filePath, final String directoryPath, final long workSize) {
         final ArrayList<File> result;
         final int numberFiles = (int) Math.ceil((double) new File(filePath).length() / workSize);
-        result = fileManager.createFilesInDirectory(directoryPath, ".mytype", numberFiles);
+        result = fileManager.createFilesInDirectory(directoryPath, Constants.MY_TYPE, numberFiles);
 
         return result;
     }

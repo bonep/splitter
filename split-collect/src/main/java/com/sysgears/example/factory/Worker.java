@@ -44,15 +44,23 @@ public class Worker extends Thread {
     private final Progress statistic;
 
     /**
+     * Work size.
+     */
+    private final long workSize;
+
+    /**
      * Constructs worker with file streams,maximum number processed data, instance and synchronizes object.
      *
      * @param fileInputStream  file input stream
      * @param fileOutputStream file output stream
+     * @param workSize         work size
      * @param fileHandlers     file handlers object
      * @param semaphore        semaphore object
+     * @param statistic        progress for thread
      */
     public Worker(final RandomAccessFile fileInputStream,
                   final RandomAccessFile fileOutputStream,
+                  final long workSize,
                   final FileHandlers fileHandlers,
                   final Semaphore semaphore,
                   final Progress statistic) {
@@ -61,6 +69,7 @@ public class Worker extends Thread {
         this.fileHandlers = fileHandlers;
         this.semaphore = semaphore;
         this.statistic = statistic;
+        this.workSize=workSize;
         log.debug("Create worker for " + fileHandlers.getClass());
     }
 
@@ -79,7 +88,8 @@ public class Worker extends Thread {
                 log.info("For current iteration handled bytes - " + currentProgressBytes);
                 processBytes += currentProgressBytes;
                 statistic.setCurrentPosition(processBytes);
-            } while (currentProgressBytes != -1);
+            } while ((currentProgressBytes != -1)
+                    &&(processBytes!=workSize));
         } catch (InterruptedException e) {
             log.error("Exception synchronised threads: " + e.getMessage(), e);
             e.printStackTrace();

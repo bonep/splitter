@@ -10,7 +10,12 @@ public class Progress {
     /**
      * Log object.
      */
-    public static final Logger log = Logger.getLogger(Progress.class);
+    private static final Logger log = Logger.getLogger(Progress.class);
+
+    /**
+     * Progress finish.
+     */
+    public static int PROGRESS_FINISH = 100;
 
     /**
      * End position.
@@ -66,9 +71,9 @@ public class Progress {
      */
     public Integer getProgressInPercentages() {
         if (endPosition == 0) {
-            return 100;
+            return PROGRESS_FINISH;
         } else {
-            return (int) (currentPosition * 100 / endPosition);
+            return (int) (currentPosition * PROGRESS_FINISH / endPosition);
         }
     }
 }

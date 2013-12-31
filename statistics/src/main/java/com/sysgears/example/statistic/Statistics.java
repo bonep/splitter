@@ -72,6 +72,6 @@ public class Statistics extends Thread {
                 log.error("IOException when an write :" + e.getMessage(), e);
                 e.printStackTrace();
             }
-        } while (progressForThreads.getAllProgress() < 100);
+        } while (progressForThreads.getAllProgress() < Progress.PROGRESS_FINISH);
     }
 }

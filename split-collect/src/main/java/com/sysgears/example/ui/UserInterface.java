@@ -84,12 +84,12 @@ public class UserInterface {
                     filePath = ioManager.readLine();
                     ioManager.printLine("Enter directory path");
                     directoryPath = ioManager.readLine();
-                    ioManager.printLine("Enter split size in bytes");
+                    ioManager.printLine("Enter split size in mega byte");
                     Long splitSize = ioManager.readLong();
                     if (splitSize != null) {
                         log.debug("User entered command \"split\" for " + filePath + " to "
-                                + directoryPath + ", split size:" + splitSize);
-                        fileHandlersService.run(filePath, directoryPath, splitter, splitSize
+                                + directoryPath + ", split size:" + splitSize*Constants.MEGA_BYTE);
+                        fileHandlersService.run(filePath, directoryPath, splitter, splitSize*Constants.MEGA_BYTE
                                 , new Statistics(Constants.SECOND, ioManager));
                     } else {
                         ioManager.printLine("Invalid format for \"split size\"");

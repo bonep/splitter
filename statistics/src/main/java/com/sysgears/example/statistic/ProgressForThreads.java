@@ -51,9 +51,9 @@ public class ProgressForThreads {
             currentPosition += progress.getCurrentPosition();
         }
         if (endPosition == 0) {
-            result = 100;
+            result = Progress.PROGRESS_FINISH;
         } else {
-            result = currentPosition * 100 / endPosition;
+            result = currentPosition * Progress.PROGRESS_FINISH / endPosition;
         }
         log.debug("Gets all progress by threads: " + result);
 
